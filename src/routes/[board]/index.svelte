@@ -3,6 +3,7 @@
   import * as sapper from "@sapper/app";
   import { derived } from "svelte/store";
   import { loadBoard } from "../../client/board.client";
+  import { formatShortTimestamp } from "../../utils/date.utils";
 
   // TODO: add typings here
   const { page } = sapper.stores();
@@ -31,7 +32,7 @@
     {#each threads as thread (thread.num)}
       <div>
         <h3>{thread.subject}</h3>
-        <time>{thread.timestamp}</time>
+        <time>{formatShortTimestamp(thread.timestamp)}</time>
         <p>
           {@html thread.comment}
         </p>
