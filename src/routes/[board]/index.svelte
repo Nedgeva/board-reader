@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { stores } from "@sapper/app";
+  import * as sapper from "@sapper/app";
   import { derived } from "svelte/store";
 
-  const { page } = stores();
+  // TODO: add typings here
+  const { page } = sapper.stores();
 
   const board = derived(page, ($page) => $page.params.board);
   console.log("hello", $board);
