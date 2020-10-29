@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { loadBoard } from "../client/board.client";
+  import { loadBoards } from "../client/board.client";
 
   // TODO: typings here io-ts
   let boards;
 
   onMount(async () => {
-    const resp = await loadBoard().then((res) => res.json());
+    const resp = await loadBoards().then((res) => res.json());
 
     boards = resp.boards;
 
