@@ -24,7 +24,7 @@
   <title>Board Reader / {$board}</title>
 </svelte:head>
 
-<h1>You're caught up in /{$board}/ trap!</h1>
+<h1>You're seeing /{$board}/ board threads</h1>
 
 <strong>
   {#if threads}
