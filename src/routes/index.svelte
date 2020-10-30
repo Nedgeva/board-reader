@@ -1,16 +1,22 @@
-<script lang="ts">
-  import { onMount } from "svelte";
+<script lang="ts" context="module">
+  import type { Preload } from "@sapper/common";
   import { loadBoards } from "../client/board.client";
-
-  // TODO: typings here io-ts
-  let boards;
 
   const getBoardsData = async () => {
     const resp = await loadBoards().then((res) => res.json());
-    boards = resp.boards;
+    return resp;
   };
 
-  getBoardsData();
+  export const preload: Preload.Preload = async function () {
+    return await getBoardsData();
+  };
+</script>
+
+<script lang="ts">
+  import { onMount } from "svelte";
+
+  // TODO: typings here io-ts
+  export let boards;
 
   onMount(async () => {
     /* compare with cached/db data */
