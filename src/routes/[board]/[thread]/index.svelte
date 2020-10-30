@@ -13,14 +13,18 @@
 
   let posts;
 
-  onMount(async () => {
+  const getPostsData = async () => {
     const threadData = await loadThread($board, $thread).then((res) =>
       res.json()
     );
 
-    console.log(threadData.threads[0].posts);
-
     posts = threadData.threads[0].posts;
+  };
+
+  getPostsData();
+
+  onMount(async () => {
+    /* compare with cached data */
   });
 </script>
 

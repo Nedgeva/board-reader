@@ -5,12 +5,15 @@
   // TODO: typings here io-ts
   let boards;
 
-  onMount(async () => {
+  const getBoardsData = async () => {
     const resp = await loadBoards().then((res) => res.json());
-
     boards = resp.boards;
+  };
 
-    console.log(boards);
+  getBoardsData();
+
+  onMount(async () => {
+    /* compare with cached/db data */
   });
 </script>
 

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import * as sapper from "@sapper/app";
   import { derived } from "svelte/store";
-  import { loadBoard } from "../../client/board.client";
+  import { loadBoardIndex } from "../../client/board.client";
   import { formatShortTimestamp } from "../../utils/date.utils";
 
   // TODO: add typings here
@@ -12,12 +12,15 @@
 
   let threads;
 
-  onMount(async () => {
-    const boardData = await loadBoard($board).then((res) => res.json());
-
-    console.log(boardData);
-
+  const getBoardData = async () => {
+    const boardData = await loadBoardIndex($board).then((res) => res.json());
     threads = boardData.threads;
+  };
+
+  getBoardData();
+
+  onMount(async () => {
+    /*  */
   });
 </script>
 
@@ -29,14 +32,20 @@
 
 <strong>
   {#if threads}
-    {#each threads as thread (thread.num)}
+    {#each threads as thread (thread.thread_num)}
       <div>
-        <h3>{thread.subject}</h3>
-        <time>{formatShortTimestamp(thread.timestamp)}</time>
+        <h3>{thread.posts[0].subject}</h3>
+        <time>{formatShortTimestamp(thread.posts[0].timestamp)}</time>
         <p>
-          {@html thread.comment}
+          {@html thread.posts[0].comment}
         </p>
-        <a href="/{$board}/{thread.num}">>>{thread.num}</a>
+        {#each thread.posts.slice(1) as post (post.num)}
+          <small>
+            {@html post.comment}
+            <br />
+          </small>
+        {/each}
+        <a href="/{$board}/{thread.thread_num}">>>{thread.thread_num}</a>
         <hr />
       </div>
     {/each}
