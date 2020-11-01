@@ -1,8 +1,21 @@
+<script lang="ts" context="module">
+  import type { Preload } from "@sapper/common";
+  import { loadThread } from "../../../client/board.client";
+
+  const getPostsData = (board: string, thread: string) =>
+    loadThread(board, thread)
+      .then((res) => res.json())
+      .then((threadData) => threadData.threads[0]);
+
+  export const preload: Preload.Preload = async function (page) {
+    return await getPostsData(page.params.board, page.params.thread);
+  };
+</script>
+
 <script lang="ts">
   import { onMount } from "svelte";
   import * as sapper from "@sapper/app";
   import { derived } from "svelte/store";
-  import { loadThread } from "../../../client/board.client";
   import { formatShortTimestamp } from "../../../utils/date.utils";
 
   // TODO: add typings here
@@ -11,17 +24,7 @@
   const board = derived(page, ($page) => $page.params.board);
   const thread = derived(page, ($page) => $page.params.thread);
 
-  let posts;
-
-  const getPostsData = async () => {
-    const threadData = await loadThread($board, $thread).then((res) =>
-      res.json()
-    );
-
-    posts = threadData.threads[0].posts;
-  };
-
-  getPostsData();
+  export let posts;
 
   onMount(async () => {
     /* compare with cached data */
