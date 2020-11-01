@@ -2,10 +2,7 @@
   import type { Preload } from "@sapper/common";
   import { loadBoards } from "../client/board.client";
 
-  const getBoardsData = async () => {
-    const resp = await loadBoards().then((res) => res.json());
-    return resp;
-  };
+  const getBoardsData = () => loadBoards().then((res) => res.json());
 
   export const preload: Preload.Preload = async function () {
     return await getBoardsData();
