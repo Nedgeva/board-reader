@@ -8,22 +8,18 @@
       .then((threadData) => threadData.threads[0]);
 
   export const preload: Preload.Preload = async function (page) {
-    return await getPostsData(page.params.board, page.params.thread);
+    const { board, thread } = page.params;
+    const { posts } = await getPostsData(board, thread);
+    return { board, thread, posts };
   };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as sapper from "@sapper/app";
-  import { derived } from "svelte/store";
   import { formatShortTimestamp } from "../../../utils/date.utils";
 
-  // TODO: add typings here
-  const { page } = sapper.stores();
-
-  const board = derived(page, ($page) => $page.params.board);
-  const thread = derived(page, ($page) => $page.params.thread);
-
+  export let board;
+  export let thread;
   export let posts;
 
   onMount(async () => {
