@@ -6,20 +6,17 @@
     loadBoardIndex(board).then((res) => res.json());
 
   export const preload: Preload.Preload = async function (page) {
-    return await getBoardData(page.params.board);
+    const { board } = page.params;
+    const { threads } = await getBoardData(page.params.board);
+    return { board, threads };
   };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as sapper from "@sapper/app";
-  import { derived } from "svelte/store";
   import { formatShortTimestamp } from "../../utils/date.utils";
 
-  // TODO: add typings here
-  const { page } = sapper.stores();
-
-  const board = derived(page, ($page) => $page.params.board);
+  export let board;
 
   export let threads;
 
