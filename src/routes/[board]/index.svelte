@@ -26,10 +26,10 @@
 </script>
 
 <svelte:head>
-  <title>Board Reader / {$board}</title>
+  <title>Board Reader / {board}</title>
 </svelte:head>
 
-<h1>You're seeing /{$board}/ board threads</h1>
+<h1>You're seeing /{board}/ board threads</h1>
 
 <strong>
   {#if threads}
@@ -46,7 +46,7 @@
             <br />
           </small>
         {/each}
-        <a href="/{$board}/{thread.thread_num}">>>{thread.thread_num}</a>
+        <a href="/{board}/{thread.thread_num}">>>{thread.thread_num}</a>
         <hr />
       </div>
     {/each}
