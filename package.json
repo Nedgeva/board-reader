@@ -12,6 +12,7 @@
   "dependencies": {
     "compression": "^1.7.1",
     "date-fns": "^2.16.1",
+    "dexie": "^3.0.2",
     "isomorphic-fetch": "^3.0.0",
     "polka": "next",
     "sirv": "^1.0.0"

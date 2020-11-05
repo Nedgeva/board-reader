@@ -17,7 +17,6 @@
   import { formatShortTimestamp } from "../../utils/date.utils";
 
   export let board;
-
   export let threads;
 
   onMount(async () => {
@@ -35,7 +34,7 @@
   {#if threads}
     {#each threads as thread (thread.thread_num)}
       <div>
-        <h3>{thread.posts[0].subject}</h3>
+        <h3>>>{thread.thread_num} {thread.posts[0].subject}</h3>
         <time>{formatShortTimestamp(thread.posts[0].timestamp)}</time>
         <p>
           {@html thread.posts[0].comment}
@@ -46,7 +45,7 @@
             <br />
           </small>
         {/each}
-        <a href="/{board}/{thread.thread_num}">>>{thread.thread_num}</a>
+        <a href="/{board}/{thread.thread_num}">Go to thread >>{thread.thread_num}</a>
         <hr />
       </div>
     {/each}

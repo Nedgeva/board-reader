@@ -1,4 +1,14 @@
 import { timestamp, files, shell } from '@sapper/service-worker';
+import Dexie from "dexie";
+
+const db = new Dexie("app");
+
+db.version(3).stores({
+  boards: "&id,category,info,name",
+  updates: "name",
+  threadsUpdate: "&id,board,lastUpdate",
+  threads: "&id,board",
+});
 
 const ASSETS = `cache${timestamp}`;
 
@@ -18,7 +28,7 @@ self.addEventListener('install', (event: ExtendableEvent) => {
 	);
 });
 
-self.addEventListener('activate', (event: ExtendableEvent) => {
+self.addEventListener('activate', async (event: ExtendableEvent) => {
 	event.waitUntil(
 		caches.keys().then(async keys => {
 			// delete old caches
@@ -29,6 +39,10 @@ self.addEventListener('activate', (event: ExtendableEvent) => {
 			((self as any) as ServiceWorkerGlobalScope).clients.claim();
 		})
 	);
+
+	console.log("hello from service worker!!!!");
+	const threads = await db.table("threads").toArray();
+	console.log(threads);
 });
 
 

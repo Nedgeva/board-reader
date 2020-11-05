@@ -1,6 +1,9 @@
 <script lang="ts" context="module">
   import type { Preload } from "@sapper/common";
-  import { loadThread } from "../../../client/board.client";
+  import {
+    addThreadToWatchlist,
+    loadThread,
+  } from "../../../client/board.client";
 
   const getPostsData = (board: string, thread: string) =>
     loadThread(board, thread)
@@ -24,6 +27,7 @@
 
   onMount(async () => {
     /* compare with cached data */
+    addThreadToWatchlist(thread, board, posts);
   });
 </script>
 
