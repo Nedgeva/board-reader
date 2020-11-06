@@ -40,7 +40,6 @@ self.addEventListener('activate', async (event: ExtendableEvent) => {
 		})
 	);
 
-	console.log("hello from service worker!!!!");
 	const threads = await db.table("threads").toArray();
 	console.log(threads);
 });
