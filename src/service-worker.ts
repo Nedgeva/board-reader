@@ -114,19 +114,3 @@ self.addEventListener("periodicsync", (event) => {
   }
 });
 
-const installPeriodicSync = async () => {
-  if ("periodicSync" in self.registration) {
-    try {
-      console.log("run");
-      await self.registration.periodicSync.register(BACKGROUND_SYNC_WORK_TAG, {
-        minInterval: 24 * 60 * 60 * 1000,
-      });
-      console.log(await self.registration.periodicSync.getTags());
-    } catch (error) {
-      // Periodic background sync cannot be used.
-      console.log("error");
-    }
-  }
-};
-
-installPeriodicSync();
