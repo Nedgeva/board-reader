@@ -35,7 +35,7 @@
   <title>Board Reader /{board}/ {thread}</title>
 </svelte:head>
 
-<h1>Welcome to {thread} thread in /{board}/ thread</h1>
+<h1>Welcome to {thread} thread in /{board}/ board</h1>
 
 <strong>
   {#if posts}
