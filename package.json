@@ -16,6 +16,7 @@
     "fp-ts": "^2.8.5",
     "io-ts": "^2.2.12",
     "isomorphic-fetch": "^3.0.0",
+    "node-sass": "^5.0.0",
     "polka": "next",
     "sirv": "^1.0.0"
   },
@@ -42,7 +43,7 @@
     "sapper": "^0.28.0",
     "svelte": "^3.17.3",
     "svelte-check": "^1.0.46",
-    "svelte-preprocess": "^4.3.0",
+    "svelte-preprocess": "^4.5.2",
     "tslib": "^2.0.1",
     "typescript": "^4.0.3"
   }

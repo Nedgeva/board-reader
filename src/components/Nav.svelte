@@ -2,7 +2,9 @@
 	export let segment: string;
 </script>
 
-<style>
+<style type="text/scss">
+	$color-black: #000;
+
 	nav {
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
