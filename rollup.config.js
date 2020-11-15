@@ -34,7 +34,7 @@ export default {
 				dev,
 				hydratable: true,
 				preprocess: sveltePreprocess(),
-				emitCss: true
+				emitCss: false
 			}),
 			url({
 				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),

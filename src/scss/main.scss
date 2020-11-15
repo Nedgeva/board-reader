@@ -1,8 +1,30 @@
 // based
 @import '../scss/variabless.scss';
 @import '../scss/normalize.scss';
-@import '../scss/bootstrap-grid.scss'
+@import '../scss/bootstrap-grid.scss';
+@import '../scss/breakpoints.scss';
 
 // pages
+@import '../scss/components/boardsList.scss';
+@import '../scss/components/navigation.scss';
 
-// @import '../scss/pages/'
+
+//logo
+.logo {
+    height: 30px;
+
+    &__image {
+        height: 30px;
+        transition: $transition-base;
+    }
+
+    @include mobile {
+        margin: 15px 0;
+    }
+}
+
+.container {
+    @include mobile {
+        width: auto;
+    }
+}
