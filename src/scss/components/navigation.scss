@@ -1,0 +1,62 @@
+.navigation {
+    width: 100%;
+    border-bottom: 1px solid $color-gray-dark;
+    font-weight: 300;
+    background: $color-white;
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        @include mobile {
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        li {
+            display: block;
+        }
+        
+        [aria-current] {
+            position: relative;
+            display: inline-block;
+        }
+        
+        [aria-current]::after {
+            position: absolute;
+            content: '';
+            width: calc(100% - 1em);
+            height: 2px;
+            background-color: $color-orange;
+            display: block;
+            bottom: -1px;
+        }
+        
+        a {
+            text-decoration: none;
+            padding: 1em 0.5em;
+            display: block;
+        }
+    }
+
+    @include mobile {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+}

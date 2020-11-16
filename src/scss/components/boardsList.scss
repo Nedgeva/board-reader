@@ -1,0 +1,63 @@
+.boards-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &__container {
+        @include mobile {
+            width: auto;
+        }
+    }
+
+    &__item {
+        margin-bottom: 4%;
+        width: 24%;
+
+        @include desktop {
+            width: 30%;
+        }
+
+        @include mobile {
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    &__link {
+        padding: 4%;
+        height: 88%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 24px;
+        text-align: center;
+        background: $color-white;
+        border: 1px solid $color-gray-dark;
+        text-decoration: none;
+        transition: $transition-base;
+
+        &:hover {
+            background: $color-orange;
+            color: $color-white;
+        }
+
+        @include mobile {
+            padding: 4% 0;
+            width: 100%;
+        }
+    }
+
+    @include mobile {
+        max-width: 100%;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        overflow: hidden;
+    }
+}
