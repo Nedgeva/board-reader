@@ -14,11 +14,10 @@
   import type { Either } from "fp-ts/lib/Either";
   import type { Boards } from "../client/dto/boards.dto";
 
-  // TODO: typings here io-ts
   export let boards: Either<Error, Boards>;
 
   onMount(async () => {
-    /* compare with cached/db data */
+    /* TODO: compare with cached/db data */
   });
 </script>
 
@@ -27,7 +26,7 @@
 </style>
 
 <svelte:head>
-  <title>Sapper project template</title>
+  <title>Добро пожаловать. Снова.</title>
 </svelte:head>
 
 <h1>Список досок:</h1>
