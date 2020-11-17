@@ -1,10 +1,16 @@
 import fetch from "isomorphic-fetch";
 import Dexie from "dexie";
+import { Boards } from "./dto/boards.dto";
+import type { Either } from "fp-ts/lib/Either";
+import { flow } from "fp-ts/lib/function";
+import { either } from "fp-ts";
 
 const CORS_PROXY_URL = "https://api.codetabs.com/v1/proxy/?quest=";
 
-export const loadBoards = () =>
-  fetch(`${CORS_PROXY_URL}https://2ch.hk/boards.json`);
+export const loadBoards = (): Promise<Either<Error, Boards>> =>
+  fetch(`${CORS_PROXY_URL}https://2ch.hk/boards.json`)
+    .then((res) => res.json())
+    .then(flow(Boards.asDecoder().decode, either.mapLeft(either.toError)));
 
 // TODO: add union literals...
 export const loadBoard = (board: string) =>

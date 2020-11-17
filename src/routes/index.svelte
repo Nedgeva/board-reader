@@ -1,28 +1,27 @@
-<style type="text/scss">
-	@import '../scss/main.scss';
-</style>
-
 <script lang="ts" context="module">
   import type { Preload } from "@sapper/common";
   import { loadBoards } from "../client/board.client";
 
-  const getBoardsData = () => loadBoards().then((res) => res.json());
-
   export const preload: Preload.Preload = async function () {
-    return await getBoardsData();
+    return await loadBoards();
   };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { Boards } from "../client/dto/boards.dto";
 
   // TODO: typings here io-ts
-  export let boards;
+  export let boards: Boards;
 
   onMount(async () => {
     /* compare with cached/db data */
   });
 </script>
+
+<style type="text/scss">
+  @import "../scss/main.scss";
+</style>
 
 <svelte:head>
   <title>Sapper project template</title>
@@ -32,8 +31,10 @@
 
 <ul class="boards-list">
   {#if boards}
-    {#each boards as { name, id }}
-      <li class="boards-list__item"><a class="boards-list__link" href="/{id}">{name}</a></li>
+    {#each boards.boards as { name, id }}
+      <li class="boards-list__item">
+        <a class="boards-list__link" href="/{id}">{name}</a>
+      </li>
     {/each}
   {/if}
 </ul>

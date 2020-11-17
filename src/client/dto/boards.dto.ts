@@ -28,43 +28,6 @@ export interface TagsEntity {
   tag: string;
 }
 
-const Boards = t.intersection([
-  t.type({
-    global_boards: t.number,
-    global_posts: t.string,
-    global_speed: t.string,
-    is_index: t.number,
-    type: t.number,
-  }),
-  t.partial({
-    boards: t.union([
-      t.undefined,
-      t.null,
-      t.array(
-        t.type({
-          bump_limit: t.number,
-          category: t.string,
-          default_name: t.string,
-          enable_names: t.number,
-          enable_sage: t.number,
-          id: t.string,
-          info: t.string,
-          last_num: t.number,
-          name: t.string,
-          speed: t.number,
-          threads: t.number,
-          unique_posters: t.number,
-        })
-      ),
-    ]),
-    tags: t.union([
-      t.undefined,
-      t.null,
-      t.array(t.type({ board: t.string, tag: t.string })),
-    ]),
-  }),
-]);
-
 const BoardsEntity = t.type({
   bump_limit: t.number,
   category: t.string,
@@ -81,3 +44,17 @@ const BoardsEntity = t.type({
 });
 
 const TagsEntity = t.type({ board: t.string, tag: t.string });
+
+export const Boards = t.intersection([
+  t.type({
+    global_boards: t.number,
+    global_posts: t.string,
+    global_speed: t.string,
+    is_index: t.number,
+    type: t.number,
+  }),
+  t.partial({
+    boards: t.union([t.undefined, t.null, t.array(BoardsEntity)]),
+    tags: t.union([t.undefined, t.null, t.array(TagsEntity)]),
+  }),
+]);
