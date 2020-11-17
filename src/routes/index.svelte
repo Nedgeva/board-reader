@@ -3,16 +3,19 @@
   import { loadBoards } from "../client/board.client";
 
   export const preload: Preload.Preload = async function () {
-    return await loadBoards();
+    const boards = await loadBoards();
+    return { boards };
   };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import { either } from "fp-ts";
+  import type { Either } from "fp-ts/lib/Either";
   import type { Boards } from "../client/dto/boards.dto";
 
   // TODO: typings here io-ts
-  export let boards: Boards;
+  export let boards: Either<Error, Boards>;
 
   onMount(async () => {
     /* compare with cached/db data */
@@ -30,8 +33,8 @@
 <h1>Список досок:</h1>
 
 <ul class="boards-list">
-  {#if boards}
-    {#each boards.boards as { name, id }}
+  {#if either.isRight(boards)}
+    {#each boards.right.boards as { name, id }}
       <li class="boards-list__item">
         <a class="boards-list__link" href="/{id}">{name}</a>
       </li>
