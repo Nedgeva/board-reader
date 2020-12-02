@@ -103,70 +103,6 @@ const NewsAbuEntity = t.type({
   views: t.number,
 });
 
-const ThreadsEntity = t.intersection([
-  t.type({
-    files_count: t.number,
-    posts_count: t.number,
-    thread_num: t.string,
-  }),
-  t.partial({
-    posts: t.union([
-      t.undefined,
-      t.null,
-      t.array(
-        t.intersection([
-          t.type({
-            banned: t.number,
-            closed: t.number,
-            comment: t.string,
-            date: t.string,
-            email: t.string,
-            endless: t.number,
-            lasthit: t.number,
-            name: t.string,
-            num: t.string,
-            op: t.number,
-            parent: t.string,
-            sticky: t.number,
-            subject: t.string,
-            timestamp: t.number,
-            trip: t.string,
-          }),
-          t.partial({
-            files: t.union([
-              t.undefined,
-              t.null,
-              t.array(
-                t.union([
-                  t.null,
-                  t.type({
-                    displayname: t.string,
-                    fullname: t.string,
-                    height: t.number,
-                    md5: t.string,
-                    name: t.string,
-                    nsfw: t.number,
-                    path: t.string,
-                    size: t.number,
-                    thumbnail: t.string,
-                    tn_height: t.number,
-                    tn_width: t.number,
-                    type: t.number,
-                    width: t.number,
-                  }),
-                ])
-              ),
-            ]),
-            files_count: t.union([t.undefined, t.null, t.number]),
-            posts_count: t.union([t.undefined, t.null, t.number]),
-            tags: t.union([t.undefined, t.null, t.string]),
-          }),
-        ])
-      ),
-    ]),
-  }),
-]);
-
 const PostsEntity = t.intersection([
   t.type({
     banned: t.number,
@@ -213,6 +149,17 @@ const PostsEntity = t.intersection([
     files_count: t.union([t.undefined, t.null, t.number]),
     posts_count: t.union([t.undefined, t.null, t.number]),
     tags: t.union([t.undefined, t.null, t.string]),
+  }),
+]);
+
+const ThreadsEntity = t.intersection([
+  t.type({
+    files_count: t.number,
+    posts_count: t.number,
+    thread_num: t.string,
+  }),
+  t.partial({
+    posts: t.union([t.undefined, t.null, t.array(PostsEntity)]),
   }),
 ]);
 
